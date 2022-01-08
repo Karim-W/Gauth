@@ -11,6 +11,7 @@ import (
 type UserController interface {
 	AddUser(*gin.Context)
 	GetUser(*gin.Context)
+	GetAllUsers(*gin.Context)
 }
 
 func NewUserController(s services.UserService) UserController {
@@ -39,4 +40,13 @@ func (u userController) GetUser(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, user)
+}
+
+func (u userController) GetAllUsers(c *gin.Context){
+	users,err := u.userService.FetchAllUsers()
+	if err != nil{
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+                return
+	}
+	c.JSON(http.StatusOK,users)
 }
