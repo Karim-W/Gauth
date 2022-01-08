@@ -26,6 +26,8 @@ func SetupRoutes(db dbmanager.DBContext) {
 	users.GET("/:id", userController.GetUser)
 	users.GET("/", userController.GetAllUsers)
 	users.POST("/", userController.AddUser)
+	users.PATCH("/:id", userController.UpdateUser)
+	users.DELETE("/:id", userController.DeleteUser)
 	router.Run(":9022")
 
 }

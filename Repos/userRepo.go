@@ -15,7 +15,7 @@ type UserRepository interface {
 	GetUser(id string) (models.User, error)
 	GetAll() ([]models.User, error)
 	CreateUser(user models.User) (models.User, error)
-	UpdateUserDetails(user models.User) (models.User, error)
+	UpdateUserDetails(id string, user models.User) (models.User, error)
 	DeleteUser(id string) error
 	Migrate() error
 }
@@ -44,9 +44,9 @@ func (u userRepository) CreateUser(user models.User) (models.User, error) {
 	return user, err
 }
 
-func (u userRepository) UpdateUserDetails(user models.User) (models.User, error) {
+func (u userRepository) UpdateUserDetails(id string, user models.User) (models.User, error) {
 	log.Print("[UserRepository]...Update User")
-	err := u.DB.Model(&user).Updates(user).Error
+	err := u.DB.Where("id=?", id).Updates(user).Error
 	return user, err
 }
 
