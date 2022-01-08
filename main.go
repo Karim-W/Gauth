@@ -15,9 +15,10 @@
 // }
 package main
 
-import "fmt"
+import routes "gauth.com/Routes"
 
 func main() {
-	conf := LoadDBVarsFromEnv()
-	fmt.Println(*conf)
+	db := InitializeDB()
+	routes.SetupRoutes(db)
+
 }
