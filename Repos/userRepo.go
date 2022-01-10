@@ -3,7 +3,7 @@ package repos
 import (
 	"log"
 
-	"gauth.com/Dbmanager/models"
+	models "gauth.com/Database/Models"
 	"gorm.io/gorm"
 )
 

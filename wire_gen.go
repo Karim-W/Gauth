@@ -8,7 +8,7 @@ package main
 
 import (
 	"fmt"
-	"gauth.com/dbmanager"
+	"gauth.com/Database"
 	"github.com/joho/godotenv"
 	"log"
 	"os"
@@ -17,7 +17,7 @@ import (
 
 // Injectors from wire.go:
 
-func InitializeDB() dbmanager.DBContext {
+func InitializeDB() Database.DBContext {
 	dbContext := NewDB()
 	return dbContext
 }
@@ -33,13 +33,13 @@ func LoadFromEnv(key string) string {
 
 }
 
-func LoadDBVarsFromEnv() *dbmanager.DbSettingsConfig {
+func LoadDBVarsFromEnv() *Database.DbSettingsConfig {
 	fmt.Println("portNumber")
 	portNumber, err := strconv.Atoi(LoadFromEnv("DBPort"))
 	if err != nil {
 		log.Fatalln(err)
 	}
-	return &dbmanager.DbSettingsConfig{
+	return &Database.DbSettingsConfig{
 		Server:       LoadFromEnv("DBServer"),
 		Port:         portNumber,
 		User:         LoadFromEnv("DBUser"),
@@ -48,8 +48,8 @@ func LoadDBVarsFromEnv() *dbmanager.DbSettingsConfig {
 	}
 }
 
-func NewDB() dbmanager.DBContext {
+func NewDB() Database.DBContext {
 	conf := LoadDBVarsFromEnv()
-	d := dbmanager.NewDBConnection(*conf)
-	return dbmanager.DBContext{Ctx: d}
+	d := Database.NewDBConnection(*conf)
+	return Database.DBContext{Ctx: d}
 }

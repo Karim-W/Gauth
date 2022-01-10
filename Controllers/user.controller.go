@@ -1,9 +1,9 @@
 package controllers
 
 import (
+	models "gauth.com/Database/Models"
 	"net/http"
 
-	"gauth.com/Dbmanager/models"
 	"gauth.com/services"
 	"github.com/gin-gonic/gin"
 )

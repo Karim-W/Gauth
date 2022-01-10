@@ -4,13 +4,13 @@ import (
 	"log"
 
 	controllers "gauth.com/Controllers"
+	"gauth.com/Database"
 	repos "gauth.com/Repos"
-	"gauth.com/dbmanager"
 	"gauth.com/services"
 	"github.com/gin-gonic/gin"
 )
 
-func SetupRoutes(db dbmanager.DBContext) {
+func SetupRoutes(db Database.DBContext) {
 	router := gin.Default()
 	//pass DB to repos
 	userRepository := repos.NewUserRepository(db.Ctx)

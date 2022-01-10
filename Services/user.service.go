@@ -3,7 +3,7 @@ package services
 import (
 	"log"
 
-	"gauth.com/Dbmanager/models"
+	models "gauth.com/Database/Models"
 	repos "gauth.com/Repos"
 )
 

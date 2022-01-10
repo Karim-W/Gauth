@@ -9,7 +9,7 @@ import (
 	"os"
 	"strconv"
 
-	"gauth.com/dbmanager"
+	"gauth.com/Database"
 	"github.com/google/wire"
 	"github.com/joho/godotenv"
 )
@@ -23,13 +23,13 @@ func LoadFromEnv(key string) string {
 
 }
 
-func LoadDBVarsFromEnv() *dbmanager.DbSettingsConfig {
+func LoadDBVarsFromEnv() *Database.DbSettingsConfig {
 	fmt.Println("portNumber")
 	portNumber, err := strconv.Atoi(LoadFromEnv("DBPort"))
 	if err != nil {
 		log.Fatalln(err)
 	}
-	return &dbmanager.DbSettingsConfig{
+	return &Database.DbSettingsConfig{
 		Server:       LoadFromEnv("DBServer"),
 		Port:         portNumber,
 		User:         LoadFromEnv("DBUser"),
@@ -38,13 +38,13 @@ func LoadDBVarsFromEnv() *dbmanager.DbSettingsConfig {
 	}
 }
 
-func InitializeDB() dbmanager.DBContext {
+func InitializeDB() Database.DBContext {
 	wire.Build(NewDB)
-	return dbmanager.DBContext{}
+	return Database.DBContext{}
 }
 
-func NewDB() dbmanager.DBContext {
+func NewDB() Database.DBContext {
 	conf := LoadDBVarsFromEnv()
-	d := dbmanager.NewDBConnection(*conf)
-	return dbmanager.DBContext{Ctx: d}
+	d := Database.NewDBConnection(*conf)
+	return Database.DBContext{Ctx: d}
 }
