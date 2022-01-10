@@ -1,6 +1,7 @@
 package repos
 
 import (
+	"fmt"
 	"log"
 
 	models "gauth.com/Database/Models"
@@ -27,6 +28,7 @@ func NewUserRepository(db *gorm.DB) UserRepository {
 }
 
 func (u userRepository) GetUser(id string) (user models.User, err error) {
+	fmt.Println(id)
 	log.Print("[UserRepository]...Get User")
 	err = u.DB.Where("id=?", id).First(&user).Error
 	return user, err
